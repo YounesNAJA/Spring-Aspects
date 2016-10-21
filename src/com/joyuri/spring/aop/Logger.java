@@ -24,8 +24,16 @@ public class Logger {
 	 * Reusable pointcut
 	 * Executed with every String param
 	 */
-	@Pointcut("execution(void com.joyuri.spring.aop.Camera.snap(String))")
+	@Pointcut("execution(* com.joyuri.spring.aop.Camera.snap(String))")
 	public void cameraSnapString() {
+	}
+	
+	/*
+	 * Reusable pointcut
+	 * Executed with every action
+	 */
+	@Pointcut("execution(* com.joyuri.spring.aop.*.*(..))")
+	public void anyActionPC() {
 	}
 
 
@@ -43,5 +51,13 @@ public class Logger {
 	@Before("cameraSnapString()")
 	public void PreSnapString() {
 		System.out.println("Someone is about to take a photo with Name.");
+	}
+	
+	/*
+	 * This method is called Advice
+	 */
+	@Before("anyActionPC()")
+	public void anyAction() {
+		System.out.println("Any action.");
 	}
 }
