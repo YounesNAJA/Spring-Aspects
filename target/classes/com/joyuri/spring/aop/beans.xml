@@ -8,10 +8,10 @@
 	<bean id="camera" class="com.joyuri.spring.aop.Camera"></bean>
 	<bean id="logger" class="com.joyuri.spring.aop.Logger"></bean>
 	<aop:config>
-		<aop:pointcut expression="execution(void com.joyuri.spring.aop.Camera.snap())"
-			id="camerasnap" />
+		
 		<aop:aspect id="loggeraspect" ref="logger">
-			<aop:before pointcut-ref="camerasnap" method="PreSnap" />
+			<aop:before method="PreSnap"
+				pointcut="execution(void com.joyuri.spring.aop.Camera.snap())" />
 		</aop:aspect>
 	</aop:config>
 </beans>
