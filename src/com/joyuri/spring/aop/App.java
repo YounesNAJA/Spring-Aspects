@@ -10,6 +10,8 @@ public class App {
 		
 		context.close();
 		cam.snap();
+		cam.snap(2500);
+		cam.snap("Younes");
 	}
 
 }
