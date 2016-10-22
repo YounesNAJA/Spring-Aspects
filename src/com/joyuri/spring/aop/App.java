@@ -13,7 +13,13 @@ public class App {
 		cam.snap();
 		cam.snap(2500);
 		cam.snap("Younes");
-		cam.snapNight();
+		try {
+			cam.snapNight(15);
+		} catch (Exception e) {
+			System.out.println("Exception");
+		}
+		
+		
 		robot.move();
 	}
 

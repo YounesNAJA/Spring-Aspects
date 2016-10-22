@@ -19,7 +19,8 @@ public class Camera {
 		return name;
 	}
 	
-	public void snapNight(){
+	public void snapNight(int a){
+		int b = a / 0;
 		System.out.println("SNAP! Night mode.");
 	}
 }
