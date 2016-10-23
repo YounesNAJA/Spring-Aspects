@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 
 
 @Component
-public class Camera {
+public class Camera implements Snap, Machine {
 	
 	public void snap(){
 		System.out.println("SNAP!");
