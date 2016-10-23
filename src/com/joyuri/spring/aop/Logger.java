@@ -1,7 +1,9 @@
 package com.joyuri.spring.aop;
 
+import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
+import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
@@ -38,7 +40,7 @@ public class Logger {
 	/*
 	 * This method is called Advice
 	 */
-	@Before("cameraSnap()")
+	// @Before("cameraSnap()")
 	public void PreSnap() {
 		System.out.println("Someone is about to take a photo.");
 	}
@@ -46,7 +48,7 @@ public class Logger {
 	/*
 	 * This method is called Advice
 	 */
-	@Before("cameraSnapString()")
+	// @Before("cameraSnapString()")
 	public void PreSnapString() {
 		System.out.println("Someone is about to take a photo with Name.");
 	}
@@ -54,7 +56,7 @@ public class Logger {
 	/*
 	 * This method is called Advice
 	 */
-	@Before("anyActionPC()")
+	// @Before("anyActionPC()")
 	public void anyAction() {
 		System.out.println("Any action.");
 	}
@@ -62,7 +64,7 @@ public class Logger {
 	/*
 	 * This method is called if there is no exception
 	 */
-	@AfterReturning("execution(* *.*(..))")
+	// @AfterReturning("execution(* *.*(..))")
 	public void afterReturning() {
 		System.out.println("After a method without exception.");
 	}
@@ -70,8 +72,18 @@ public class Logger {
 	/*
 	 * This method is called if there an exception
 	 */
-	@AfterThrowing("execution(* *.*(..))")
-	public void AfterThrowing() {
-		System.out.println("EXCEPTION HERE!!");
+	// @AfterThrowing("execution(* *.*(..))")
+	@Around("cameraSnap()")
+	public void AfterThrowing(ProceedingJoinPoint pjp) {
+		System.out.println("Around before");
+		
+		try {
+			pjp.proceed();
+		} catch (Throwable e) {
+			System.out.println("Exception: " + e.getMessage());
+		}
+		
+		System.out.println("Around after");
+		
 	}
 }
